@@ -1,0 +1,145 @@
+<html>
+
+<head>
+
+    <title>Ajax Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+
+
+    <script type="text/javascript">
+
+        function add() {
+
+            var bname = document.getElementById("bname").value;
+            var aname = document.getElementById("aname").value;
+            var bprice = document.getElementById("bprice").value;
+            var obj = { bookName: bname, authorName: aname, bookPrice: bprice }
+            var library = JSON.stringify(obj);
+            alert("inserted successfully");
+
+            $.ajax({
+
+                type: "POST",
+                contentType: "application/json",
+                url: "http://localhost:5050/lib/add",
+                data: library,
+                success: function (data) {
+
+                },
+                error: function (e) {
+                    console.log("error", e)
+                }
+            })
+
+        }
+
+        function get() {
+        
+            console.log("get");
+           
+
+
+            $.ajax({
+
+                type: "GET",
+                contentType: "application/json",
+                url: "http://localhost:5050/lib/getall",
+                success: function (lib) {
+                    console.log(lib)
+                },
+                error: function (e) {
+                    console.log("error", e)
+                }
+            })
+           
+        }
+
+
+
+
+    </script>
+
+
+    <!-- <button type="button" class="btn btn-primary" id="insert">Insert</button> -->
+
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-3">
+            <h2>Book Details</h2>
+        </div>
+
+        <div class="col-sm-4"></div>
+
+    </div>
+
+    </br>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">Enter the book Name :</div>
+
+        <div class="col-sm-6"><input type="text" size="20" name="name" id="bname" /></div>
+
+    </div>
+    </br>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">Enter the author name :</div>
+
+        <div class="col-sm-6"><input type="text" size="20" name="name" id="aname" /></div>
+
+    </div>
+    </br>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">Enter the price :</div>
+
+        <div class="col-sm-6"><input type="text" size="20" name="name" id="bprice" /></div>
+
+    </div>
+    </br>
+
+
+
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2"><input type="button" onclick="add()" value="insert"></div>
+
+        <div class="col-sm-5"><input type="button" onclick="get()" value="view"></div>
+
+    </div>
+    </br>
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-3"></div>
+
+        <div class="col-sm-4"></div>
+
+    </div>
+
+    <!-- <h2>List</h2>
+    <table id="library" style="width: 100%">
+        <tr class="row" id="head1">
+            <th class="col-sm-3" style="background-color:yellow;">Book Id</th>
+            <th class="col-sm-3" style="background-color:orange;">Book Name</th>
+            <th class="col-sm-3" style="background-color:yellow;">Author Name</th>
+            <th class="col-sm-3" style="background-color:orange;">Book Price</th>
+        </tr>
+        
+
+    </table> -->
+
+
+
+</body>
+
+</html>
